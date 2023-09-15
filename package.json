@@ -1,5 +1,6 @@
 {
   "name": "call-of-dragons",
+  "description": "A website for the Call of Dragons mobile game with several useful features built using Typescript",
   "version": "0.1.0",
   "private": true,
   "scripts": {
