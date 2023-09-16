@@ -8,7 +8,7 @@ export default function FormField(props)
   return (
     <div>
       <label className='border text-slate-800'>{props.speedUp}</label>
-      <input type='number' placeholder='0' className='border' onChange={props.handleInput}></input>
+      <input type='number' placeholder='0' className='border' onChange={(e) => {props.handleInput(e, props.speedUp)}}></input>
     </div>
   )
 }
