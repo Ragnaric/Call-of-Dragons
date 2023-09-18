@@ -3,18 +3,23 @@
 import React, { useEffect, useState } from "react";
 import { text } from "stream/consumers";
 import { forEachChild } from "../../../node_modules/typescript/lib/typescript";
-import FormField from './form field.tsx'
+import { FormField } from './formField'
 
 export default function Page()
 {
   const[total, setTotal] = useState(0);
   const[minutes, setMinutes] = useState(0);
 
-  const speedUps: string[] = ['1m', '5m', '10m', '15m', '30m', '60m', '3h', '8h', '15h', '24h', '7d'];
+  const speedUps: string[] = ['1m', '5m', '10m', '15m', '30m', '60m', '3h', '8h', '15h', '24h', '3d', '7d'];
   const[entries, setEntries] = useState({});
 
-  const inputNumber = (e: React.ChangeEvent<FormField>, key: string) => {
-    let allEntries = entries;
+  // interface Props {
+  //   speedUp: string,
+  //   handleInput: void
+  // }
+
+  const inputNumber = (e: React.ChangeEvent<HTMLInputElement>, key: string) => {
+    let allEntries: {[key: string]: number} = entries;
     allEntries[key] = Number(e.currentTarget.value);
     if (!allEntries[key])
     {
@@ -43,10 +48,10 @@ export default function Page()
     setMinutes(sum);
   };
 
-  useEffect(() => {
-    console.log(entries);
-    console.log(minutes);
-  });
+  // useEffect(() => {
+  //   console.log(entries);
+  //   console.log(minutes);
+  // });
 
   return (
     <main className="flex-row justify-center text-center text-slate-800">
