@@ -7,7 +7,7 @@ import { FormField } from './formField'
 
 export default function Page()
 {
-  const[total, setTotal] = useState(0);
+  const[total, setTotal] = useState('');
   const[minutes, setMinutes] = useState(0);
 
   const speedUps: string[] = ['1m', '5m', '10m', '15m', '30m', '60m', '3h', '8h', '15h', '24h', '3d', '7d'];
@@ -46,6 +46,58 @@ export default function Page()
     }
     setEntries(allEntries);
     setMinutes(sum);
+
+    let days: number;
+    let hours: number;
+    let remainder: number;
+
+    if (sum >= 1440)
+    {
+      days = Math.floor(sum / 1440);
+      if (sum % 1440 > 0)
+      {
+        remainder = sum % 1440;
+        hours = Math.floor(remainder / 60);
+        if (remainder >= 60)
+        {
+          remainder = remainder % 60;
+          if (remainder > 0)
+          {
+            setTotal(`${days} days, ${hours} hours, ${remainder} minutes`);
+          }
+          else
+          {
+            setTotal(`${days} days, ${hours} hours`);
+          }
+        }
+        else
+        {
+          setTotal(`${days} days, ${remainder} minutes`);
+        }
+      }
+      else
+      {
+        setTotal(`${days} days`);
+      }
+    }
+    else if (sum >= 60)
+    {
+      hours = Math.floor(sum / 60);
+
+      if (sum % 60 > 0)
+      {
+        remainder = sum % 60;
+        setTotal(`${hours} hours, ${remainder} minutes`);
+      }
+      else
+      {
+        setTotal(`${hours} hours`);
+      }
+    }
+    else
+    {
+      setTotal(`${sum} minutes`);
+    }
   };
 
   // useEffect(() => {
